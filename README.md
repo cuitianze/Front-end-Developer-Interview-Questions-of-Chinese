@@ -1,10 +1,6 @@
 #前端工作面试问题
 
-**备注:** 本 repo 包含了一些前端面试问题用于考查候选者。不建议对单个候选者问及每个问题（那需要好几个小时）。只要从列表里挑选一些，就能帮助你考查候选者是否具备所需要的技能了。
-
-[Rebecca Murphey](http://rmurphey.com/) 的 [Baseline For Front-End Developers](http://rmurphey.com/blog/2012/04/12/a-baseline-for-front-end-developers/) 是你在准备面试前应该阅读的绝佳资源。
-
-**记住：** 很多问题都是开放的，可以引发有趣的讨论。这比直接的答案更能体现此人的能力。
+[Rebecca Murphey](http://rmurphey.com/) 的 [Baseline For Front-End Developers](http://rmurphey.com/blog/2012/04/12/a-baseline-for-front-end-developers/) 是在准备面试前应该阅读的绝佳资源。
 
 ## <a name='toc'>目录</a>
 
@@ -20,21 +16,7 @@
 
 ####[[⬆]](#toc) <a name='contributors'>最初贡献者</a>
 
-这里大部分的面试题都摘抄自 [Paul Irish](http://paulirish.com) ([@paul_irish](http://twitter.com/paul_irish)) 在 [oksoclap](http://oksoclap.com/) 创建的帖子，这份原帖的贡献者还有：
-
-* [@bentruyman](http://twitter.com/bentruyman) - http://bentruyman.com
-* [@cowboy](http://twitter.com/cowboy) - http://benalman.com
-* [@ajpiano](http://ajpiano) - http://ajpiano.com
-* [@SlexAxton](http://twitter.com/slexaxton) - http://alexsexton.com
-* [@boazsender](http://twitter.com/boazsender) - http://boazsender.com
-* [@miketaylr](http://twitter.com/miketaylr) - http://miketaylr.com
-* [@vladikoff](http://twitter.com/vladikoff) - http://vladfilippov.com
-* [@gf3](http://twitter.com/gf3) - http://gf3.ca
-* [@jon_neal](http://twitter.com/jon_neal) - http://twitter.com/jon_neal
-* [@wookiehangover](http://twitter.com/wookiehangover) - http://wookiehangover.com
-* [@darcy_clarke](http://twitter.com/darcy) - http://darcyclarke.me
-* [@iansym](http://twitter.com/iansym)
-
+这里大部分的面试题来源于 [darcyclarke/Front-end-Developer-Interview-Questions](https://github.com/darcyclarke/Front-end-Developer-Interview-Questions), 摘抄自 [Paul Irish](http://paulirish.com) ([@paul_irish](http://twitter.com/paul_irish)) 在 [oksoclap](http://oksoclap.com/) 创建的帖子，部分问题由 [博陵](http://崔天泽.中国) 整理而来。
 
 ####[[⬆]](#toc) <a name='general'>常见问题：</a>
 
