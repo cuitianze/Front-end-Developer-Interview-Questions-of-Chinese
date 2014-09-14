@@ -288,17 +288,17 @@
 * js如何判断浏览器正在以何种方式解析？
 	* 使用 document.compatMode来判断浏览器的解析方式。
 		* 例如：
-			```javascript	
-			function getMode{
-			    var _cm = docoment.compatMode;
-			    if(_cm == 'CSS1Compat'){
-			         return "strict"
-			    } 
-			    if(_cm == 'BackCompat' ){
-			         return  'quirks'
-			    } 
-			}
-			```
+```javascript
+	function getMode{
+	    var _cm = docoment.compatMode;
+	    if(_cm == 'CSS1Compat'){
+	         return "strict"
+	    } 
+	    if(_cm == 'BackCompat' ){
+	         return  'quirks'
+	    } 
+	}
+```
 
 ####[[⬆]](#toc) <a name='css'>CSS 相关问题：</a>
 
