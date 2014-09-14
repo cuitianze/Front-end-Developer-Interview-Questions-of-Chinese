@@ -386,8 +386,13 @@
 * 请罗列出你所知道的 display 属性的全部值
 
 * 请解释一下 inline 和 inline-block 的区别？
+	* inline-block可以设置行高
 
 * 请解释一下 relative、fixed、absolute 和 static 元素的区别
+	* 1）static：默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right 或者 z-index 声明）。
+	* 2）relative：生成相对定位的元素，通过top,bottom,left,right的设置相对于其正常位置进行定位。可通过z-index进行层次分级。relative的元素脱离正常的文本流中，但其在文本流中的位置依然存在。
+	* 3）absolute：生成绝对定位的元素，相对于 static 定位以外的第一个父元素进行定位。元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。可通过z-index进行层次分级。与relative的区别是其在正常流中的位置不在存在。
+	*　4）fixed：生成绝对定位的元素，相对于浏览器窗口进行定位。元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。可通过z-index进行层次分级。
 
 * 你目前在使用哪一套CSS框架，或者在产品线上使用过哪一套？(Bootstrap, PureCSS, Foundation 等等)
   * 如果有，请问是哪一套？如果可以，你如何改善CSS框架？
@@ -400,6 +405,10 @@
 * 解释下事件代理。
 
 * 解释下 JavaScript 中 `this` 是如何工作的。
+	* this永远指向函数运行时所在的对象，
+	* 而不是函数被创建时所在的对象。匿名函数和不处于任何对象中的函数指向window。
+	* call,apply,with指的this是谁就是谁。
+	* 普通的函数调用，函数调用被谁调用，this指的就是谁。
 
 * 解释下原型继承的原理。
 
@@ -411,10 +420,15 @@
 
 * 解释下为什么接下来这段代码不是 IIFE(立即调用的函数表达式)：`function foo(){ }();`. 
   * 要做哪些改动使它变成 IIFE?
+  	* function foo(){ }()解析器会把function foo(){ }当作一个函数声明，（）没有实际意义的函数表达式。分组操作需要包含表达式。给加上括号就行
   
 * 描述以下变量的区别：`null`，`undefined` 或 `undeclared`？
   * 该如何检测它们？
-  
+  	* undefined :js语言类型，有申明，没有初始化。
+  	* undeclared：js语法错误，没有申明直接使用，js无法找到对应的上下文。
+  	* null：是空值。
+  	* 用typeof判断undefined，==，！=null判断Null..
+
 * 什么是闭包，如何使用它，为什么要使用它？
 
 * 闭包会带来什么问题？怎么避免？
@@ -492,12 +506,16 @@ var person = new Person();
 ####[[⬆]](#toc) <a name='jquery'>jQuery 相关问题：</a>
 
 * 解释"chaining"。
+	* 通过 jQuery，您可以把动作/方法链接起来。
+	* Chaining 允许我们在一条语句中允许多个 jQuery 方法（在相同的元素上）。
+
 
 * 解释"deferreds"。
 
 * 你知道哪些针对 jQuery 的优化方法。
 
 * 请解释 `.end()` 的用途。
+	* 可以一次操作多个元素，而且end( )就是要返回前一个对象，重新再选择一次
 
 * 你如何给一个事件处理函数命名空间，为什么要这样做？
 
@@ -507,10 +525,14 @@ var person = new Person();
 * 什么是效果队列？
 
 * 请指出 `.get()`，`[]`，`eq()` 的区别。
+	* eq返回的是一个jquery对象 [],get返回的是一个html 对象数组
+返回的是jQuery对象，就可以继续调用其他方法，返回的是html数组就不能调用jQuery的其他方法
 
 * 请指出 `.bind()`，`.live()` 和 `.delegate()` 的区别。
 
 * 请指出 `$` 和 `$.fn` 的区别，或者说出 `$.fn` 的用途。
+	* jQuery.extend() 的调用并不会把方法扩展到对象的实例上，引用它的方法也需要通过jQuery类来实现，如jQuery.init()
+	*而 jQuery.fn.extend()的调用把方法扩展到了对象的prototype上，所以实例化一个jQuery对象的时候，它就具有了这些方法，这是很重要的
 
 * 请优化下列选择器：
 ```javascript
