@@ -43,7 +43,7 @@
 	* GIT 版本控制常用命令汇总
 		* git version 查看当前git版本信息
 		* git help 获取全部命令帮助信息
-		* git help <command> 获取指定命令帮助信息
+		* git help \<command> 获取指定命令帮助信息
 		* git config user.name "Your Name Comes Here"  设置当前项目git用户名
 		* git config --global user.name "Your Name Comes Here"  设置全局项目git用户名
 		* git config user.email you@yourdomain.example.com 设置当前项目git电子邮件
@@ -51,31 +51,33 @@
 		* git config --list 显示当前项目设置参数
 		* git config --global --list 显示全局项目设置参数
 		* git init 初始化git仓库
-		* git add <fileName1> <fileName2> ... 添加指定文件到索引
-		* git add <folderPath> 添加指定目录到索引
+		* git add \<fileName1> \<fileName2> ... 添加指定文件到索引
+		* git add \<folderPath> 添加指定目录到索引
 		* git add . 添加git目录下的所有文件到索引
 		* git add --all 添加所有文件到索引
-		* git rm <folderPath/fileName> 删除指定文件
+		* git rm \<folderPath/fileName> 删除指定文件
 		* git status 查看当前本地库状态
 		* git commit -m "commit message" 提交当前工作目录的修改内容，使用前需要先使用 
 		* git status查看当前分支状态
 		* git log 打印历史日志
-		* git reset -hard <branchName/tag/commitID> 返回指定的commit状态，包括本地文件
-		* git reset -soft <branchName/tag/commitID> 返回指定的commit状态，不包括本地文件
+		* git reset -hard \<branchName/tag/commitID> 返回指定的commit状态，包括本地文件
+		* git reset -soft \<branchName/tag/commitID> 返回指定的commit状态，不包括本地文件
 		* git branch 查看现在本地分支情况
 		* git branch -r 查看服务器端分支情况
-		* git branch <branchName> 创建一个名为branchName的新分支
-		* git branch -d <branchName> 删除一个名为branchName的旧分支
-		* git branch -m <oldBranchName> <newBranchName> 将名为oldBranchName的分支名称修改为newBranchName
-		* git branch -m <newBranchName> 将正在工作分支名称修改为newBranchName
-		* git checkout <localBranchName> 切换到名为localBranchName的本地分支上		* git checkout <remoteBranchName> 切换到名为remoteBranchName的远程分支上，此时未新建分支，而是处于一个名为no * branch的临时分支上，还需要使用git branch -b 来创建一个新分支并将该临时分支挂接到新分支上
-		* git checkout -b <branchName> 创建一个名为branchName的新分支，并切换到该分支上
-		* git merge <branchName> 将名为branchName的分支合并到当前所处在的分支上
+		* git branch \<branchName> 创建一个名为branchName的新分支
+		* git branch -d \<branchName> 删除一个名为branchName的旧分支
+		* git branch -m \<oldBranchName> <newBranchName> 将名为oldBranchName的分支名称修改为newBranchName
+		* git branch -m \<newBranchName> 将正在工作分支名称修改为newBranchName
+		* git checkout \<localBranchName> 切换到名为localBranchName的本地分支上		
+		* git checkout \<remoteBranchName> 切换到名为remoteBranchName的远程分支上，此时未新建分支，而是处于一个名为no 
+		* branch的临时分支上，还需要使用git branch -b 来创建一个新分支并将该临时分支挂接到新分支上
+		* git checkout -b \<branchName> 创建一个名为branchName的新分支，并切换到该分支上
+		* git merge \<branchName> 将名为branchName的分支合并到当前所处在的分支上
 		* git pull 从服务器的仓库中获取代码，和本地代码合并
 		* git push 将本地代码推送到服务器的仓库中
 		* git push -f 强制将本地代码推送到服务器的仓库中，用来推送本地index和服务器index有矛盾的分支
-		* git push origin --delete <branchName> 删除名为branchName的远程分支
-		* git clone <userName>@<serviceAddress>:<serviceProjectDirectory/projectName> <localProjectDirectory>/ 从服务器端克隆项目到本地
+		* git push origin --delete \<branchName> 删除名为branchName的远程分支
+		* git clone \<userName>@\<serviceAddress>:\<serviceProjectDirectory/projectName> \<localProjectDirectory>/ 从服务器端克隆项目到本地
 
 * 你能描述一下当你制作一个网页的工作流程吗？
 	* 内容分析：分清展现在网络中内容的层次和逻辑关系
