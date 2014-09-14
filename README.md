@@ -313,6 +313,35 @@
 * 你最喜欢的图片替换方法是什么，你如何选择使用。
 
 * 讨论CSS hacks，条件引用或者其他。
+	* 在这个浏览器百花争鸣的时代，作为前端开发的我们为了我们漂亮的设计能适应各个浏览器可为煞费苦心，主要体现在javascript和css上面。javascript我这次就不谈了，先说说css。
+    * 为了适应不同浏览器不同的版本（版本主要就ie来说），ie这朵奇葩现在我们要兼容6-9，它的10也快出来了。。。在ie下我们可以写条件注释来区分ie和其他浏览器，以及ie的版本，这些请大家自行google。这篇文章主要讨论的是css hack。下面废话补多说了，直接上代码
+```html
+<!DOCTYPE html>  
+<html>  
+<head>  
+    <title>Css Hack</title>  
+    <style>  
+    #test   
+    {   
+        width:300px;   
+        height:300px;   
+          
+        background-color:blue;      /*firefox*/
+        background-color:red\9;      /*all ie*/
+        background-color:yellow\0;    /*ie8*/
+        +background-color:pink;        /*ie7*/
+        _background-color:orange;       /*ie6*/
+    }  
+    :root #test { background-color:purple\9; }  /*ie9*/
+    @media all and (min-width:0px){ #test {background-color:black\0;} }  /*opera*/
+    @media screen and (-webkit-min-device-pixel-ratio:0){ #test {background-color:gray;} }  /*chrome and safari*/
+    </style>  
+</head>  
+<body>  
+    <div id="test">test</div>  
+</body>  
+</html> 
+```
 
 * 如何为有功能限制的浏览器提供网页？
   * 你会使用哪些技术和处理方法？
@@ -338,6 +367,8 @@
 * 解释下浏览器是如何判断元素是否匹配某个 CSS 选择器？
 
 * 解释一下你对盒模型的理解，以及如何在 CSS 中告诉浏览器使用不同的盒模型来渲染你的布局。
+
+* 怎么样实现垂直居中？
 
 * 请解释一下 ```* { box-sizing: border-box; }``` 的作用, 并且说明使用它有什么好处？
 
