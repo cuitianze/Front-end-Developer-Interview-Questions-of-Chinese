@@ -177,7 +177,7 @@
 * 什么是 FOUC（无样式内容闪烁）？你如何来避免 FOUC？
 	* 如果使用import方法对CSS进行导入,会导致某些页面在Windows 下的Internet Explorer出现一些奇怪的现象:以无样式显示页面内容的瞬间闪烁,这种现象称之为文档样式短暂失效(Flash of Unstyled Content),简称为FOUC。
     * 原因大致为：
-		*　1，使用import方法导入样式表。
+    	*　1，使用import方法导入样式表。
 		* 2，将样式表放在页面底部
 		* 3，有几个样式表，放在html结构的不同位置。
 	* 其实原理很清楚：
