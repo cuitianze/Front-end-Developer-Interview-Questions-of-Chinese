@@ -285,6 +285,21 @@
      	* get方式是通过URL传输的数据的，数据量一般在2KB左右，但是执行效率比post高
      	* 理论上post方式没有大小限制，HTTP协议规范也没进行大小限制。post数据没有限制，限制的是服务器处理程序的能力
 
+* js如何判断浏览器正在以何种方式解析？
+	* 使用 document.compatMode来判断浏览器的解析方式。
+		* 例如：
+			```javascript	
+			function getMode{
+			    var _cm = docoment.compatMode;
+			    if(_cm == 'CSS1Compat'){
+			         return "strict"
+			    } 
+			    if(_cm == 'BackCompat' ){
+			         return  'quirks'
+			    } 
+			}
+			```
+
 ####[[⬆]](#toc) <a name='css'>CSS 相关问题：</a>
 
 * 描述下 “reset” CSS 文件的作用和使用它的好处。
