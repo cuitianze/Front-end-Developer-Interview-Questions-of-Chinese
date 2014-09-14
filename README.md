@@ -25,14 +25,70 @@
 * 编写代码的哪些方面能够使你兴奋或感兴趣？
 
 * 在制作一个Web应用或Web站点的过程中，你是如何考虑他的UI、安全性、高性能、SEO、可维护性以及技术因素的？
+	* UI：界面美观，要有个性，考虑用户使用的逻辑要简单，用起来舒适自由。使用习惯要符合大部分用户的习惯，比如少让用户输入，采用选择的方式，提供搜索和提示功能。
+	* 安全性：对输入进行有效性验证（非法字符，特殊字符）如PHP中的方法htmlspecialchars()将特殊字符（>）转化为html实体，trim()去掉用户输入的不必要字符，stripslashes()去掉用户输入的反斜杠等等。
+	* 对交互操作进行身份验证和授权（api-key,authtoken）,异常错误处理（向用户反馈单额错误提示不要让攻击者分析出一些网络环境和配置），内存溢出，注入攻击等。
+	* 高性能：
+		* DNS负载均衡
+		* HTTP重定向（通过使客户端重定向，来分散和转移请求压力，比如一些下载服务通常都有几个镜像服务器）
+	    * 分布式缓存
+	    * 负载均衡：反向代理负载均衡,
+	    * 数据库扩展：读写分离，垂直分区，水平分区。
+	    * SEO:选好关键字，描述语言，修饰性图片换成文本，合理使用h1-h6，对图片添加alt属性，链接添加target属性。
+	    * 可维护性：代码是否容易被理解，是否容易被修改和增加新的功能，当出现问题时是否能快速定位到问题代码。
 
 * 谈谈你喜欢的开发环境。(例如操作系统，编辑器，浏览器，工具等等。)
 
 * 你最熟悉哪一套版本控制系统？
+	* GIT 版本控制常用命令汇总
+		* git version 查看当前git版本信息
+		* git help 获取全部命令帮助信息
+		* git help <command> 获取指定命令帮助信息
+		* git config user.name "Your Name Comes Here"  设置当前项目git用户名
+		* git config --global user.name "Your Name Comes Here"  设置全局项目git用户名
+		* git config user.email you@yourdomain.example.com 设置当前项目git电子邮件
+		* git config --global user.email you@yourdomain.example.com 设置全局项目git电子邮件
+		* git config --list 显示当前项目设置参数
+		* git config --global --list 显示全局项目设置参数
+		* git init 初始化git仓库
+		* git add <fileName1> <fileName2> ... 添加指定文件到索引
+		* git add <folderPath> 添加指定目录到索引
+		* git add . 添加git目录下的所有文件到索引
+		* git add --all 添加所有文件到索引
+		* git rm <folderPath/fileName> 删除指定文件
+		* git status 查看当前本地库状态
+		* git commit -m "commit message" 提交当前工作目录的修改内容，使用前需要先使用 
+		* git status查看当前分支状态
+		* git log 打印历史日志
+		* git reset -hard <branchName/tag/commitID> 返回指定的commit状态，包括本地文件
+		* git reset -soft <branchName/tag/commitID> 返回指定的commit状态，不包括本地文件
+		* git branch 查看现在本地分支情况
+		* git branch -r 查看服务器端分支情况
+		* git branch <branchName> 创建一个名为branchName的新分支
+		* git branch -d <branchName> 删除一个名为branchName的旧分支
+		* git branch -m <oldBranchName> <newBranchName> 将名为oldBranchName的分支名称修改为newBranchName
+		* git branch -m <newBranchName> 将正在工作分支名称修改为newBranchName
+		* git checkout <localBranchName> 切换到名为localBranchName的本地分支上		* git checkout <remoteBranchName> 切换到名为remoteBranchName的远程分支上，此时未新建分支，而是处于一个名为no * branch的临时分支上，还需要使用git branch -b 来创建一个新分支并将该临时分支挂接到新分支上
+		* git checkout -b <branchName> 创建一个名为branchName的新分支，并切换到该分支上
+		* git merge <branchName> 将名为branchName的分支合并到当前所处在的分支上
+		* git pull 从服务器的仓库中获取代码，和本地代码合并
+		* git push 将本地代码推送到服务器的仓库中
+		* git push -f 强制将本地代码推送到服务器的仓库中，用来推送本地index和服务器index有矛盾的分支
+		* git push origin --delete <branchName> 删除名为branchName的远程分支
+		* git clone <userName>@<serviceAddress>:<serviceProjectDirectory/projectName> <localProjectDirectory>/ 从服务器端克隆项目到本地
 
 * 你能描述一下当你制作一个网页的工作流程吗？
+	* 内容分析：分清展现在网络中内容的层次和逻辑关系
+	* 结构设计：写出合理的html结构代码
+	* 布局设计：使用html+css进行布局
+	* 样式设计：首先要使用reset.css
+	* 交互设计：鼠标特效。行为设计：js代码，ajax页面行为和从服务器获取数据。最后测试兼容性。优化性能
 
 * 你能描述一下渐进增强和优雅降级之间的不同吗?
+	* 何为渐进增强、优雅降级
+		* 常用两种策略：要么优雅降级（graceful degradation，一开始就构建站点的完整功能，然后针对浏览器测试和修复），要么渐进增强（progressive enhancement，一开始只构建站点的最少特性，然后不断针对各浏览器追加功能。
+	* 两者间的（微妙）差别
+		* 万一你正挠着后脑勺，试图找出“优雅降级”和“渐进增强”之间的差别，那么我可以告诉你：“它们是看待同种事物的两种观点”。“优雅降级”和“渐进 增强”都关注于同一网站在不同设备里不同浏览器下的表现程度。关键的区别则在于它们各自关注于何处，以及这种关注如何影响工作的流程。
 	* 如果提到了特性检测，可以加分。
 
 * 请解释一下什么是“语义化的 HTML”。
