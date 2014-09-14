@@ -415,6 +415,7 @@
 * 你是如何测试JavaScript代码的？
 
 * AMD vs. CommonJS？
+	* AMD是依赖提前加载,CMD是依赖延时加载
 
 * 什么是哈希表？
 
