@@ -579,11 +579,16 @@ HTML5？
 * 请解释一下 ```* { box-sizing: border-box; }``` 的作用, 并且说明使用它有什么好处？
 
 * 请罗列出你所知道的 display 属性的全部值
+  * block 像块类型元素一样显示。
+  * none 缺省值。向行内元素类型一样显示。
+  * inline-block 像行内元素一样显示，但其内容象块类型元素一样显示。
+  * list-item 象块类型元素一样显示，并添加样式列表标记。
 
 * 请解释一下 inline 和 inline-block 的区别？
 	* inline-block可以设置行高
 
 * 请解释一下 relative、fixed、absolute 和 static 元素的区别
+	* inherit 规定从父元素继承 position 属性的值。
 	* 1）static：默认值。没有定位，元素出现在正常的流中（忽略 top, bottom, left, right 或者 z-index 声明）。
 	* 2）relative：生成相对定位的元素，通过top,bottom,left,right的设置相对于其正常位置进行定位。可通过z-index进行层次分级。relative的元素脱离正常的文本流中，但其在文本流中的位置依然存在。
 	* 3）absolute：生成绝对定位的元素，相对于 static 定位以外的第一个父元素进行定位。元素的位置通过 "left", "top", "right" 以及 "bottom" 属性进行规定。可通过z-index进行层次分级。与relative的区别是其在正常流中的位置不在存在。
@@ -1285,6 +1290,7 @@ foo.push(2);
 - 常使用的库有哪些？常用的前端开发工具？开发过什么应用或组件？
 
 - 页面重构怎么操作？
+	* 编写 CSS、让页面结构更合理化，提升用户体验，实现良好的页面效果和提升性能。
 
 - 列举IE 与其他浏览器不一样的特性？
 
