@@ -227,6 +227,7 @@
 	* nodejs, Famo.us
 
 * Long-Polling, Websockets, SSE(Server-Sent Event) 之间有什么区别？
+	* [Long-Polling, Websockets, SSE(Server-Sent Event), WebRTC 之间的区别](http://www.vipaq.com/Article/View/blog/419.html)
 
 * 请谈一下你对网页标准和标准制定机构重要性的理解。
 	* 让浏览器兼容性的问题尽量小，对浏览器的开发者的约束，也是对web开发者的约束。
