@@ -615,7 +615,10 @@ HTML5？
 	* CSS Sprites其实就是把网页中一些背景图片整合到一张图片文件中，再利用CSS的“background-image”，“background- repeat”，“background-position”的组合进行背景定位，background-position可以用数字能精确的定位出背景图片的位置。
 
 * 你最喜欢的图片替换方法是什么，你如何选择使用。
-	* \<h2> \<span 图片丢这里>\</span>Hello World \</h2> * 把span背景设成文字内容，这样又可以保证seo，也有图片的效果在上面。
+```html
+	<h2> <span 图片丢这里></span>Hello World </h2> 
+```
+	* 把span背景设成文字内容，这样又可以保证seo，也有图片的效果在上面。
 	*  一般都是：alt，title，onerror
 
 * 讨论CSS hacks，条件引用或者其他。
@@ -929,6 +932,16 @@ HTML5？
 ####[[⬆]](#toc) <a name='js'>JS相关问题：</a>
 
 * 解释下事件代理。
+	* JavaScript事件代理则是一种简单的技巧，通过它你可以把事件处理器添加到一个父级元素上，这样就避免了把事件处理器添加到多个子级元素上。
+	* 当我们需要对很多元素添加事件的时候，可以通过将事件添加到它们的父节点而将事件委托给父节点来触发处理函数。这主要得益于浏览器的事件冒泡机制。
+ 	* 事件代理用到了两个在JavaSciprt事件中常被忽略的特性：事件冒泡以及目标元素。
+```javascript 	
+ function getEventTarget(e) {
+ e = e || window.event;
+ return e.target || e.srcElement;
+ }
+ ```
+
 
 * 解释下 JavaScript 中 `this` 是如何工作的。
 	* this永远指向函数运行时所在的对象，
