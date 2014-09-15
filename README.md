@@ -1202,6 +1202,38 @@ var person = new Person();
 * 什么是 `"use strict";` ? 使用它的好处和坏处分别是什么？
 	* 严格模式会导致出现错误就终止了。 开发时候使用一下可以防bug.
 
+	* 如果给JavaScript代码标志为“严格模式”，则其中运行的所有代码都必然是严格模式下的。
+	* 其一：如果在语法检测时发现语法问题，则整个代码块失效，并导致一个语法异常。
+	* 其二：如果在运行期出现了违反严格模式的代码，则抛出执行异常。
+	* 注：经过测试IE6,7,8,9均不支持严格模式。
+	* JavaScript代码“严格模式”使用方法：
+	* 严格模式需要使用字符串序列：
+	* "use strict"
+	* 在如下位置加入可以开启相应代码块中的严格模式：
+	* 1.必须在全局代码的开始处加入。
+	* 2.在eval代码开始处加入。
+	* 3.在函数声明代码开始处加入。
+	* 4.在new Function()所传入的body参数块开始加入。
+	* 例1：
+	* var num =012;alert(num);
+	* 在非严格模式下，可以使用0（零）开头前缀声明8进制。显示10。
+	* 但是在严格模式下，会产生错误。
+	* "use strict";
+	* var num =012;
+	* alert(num);
+	* 测试结果：
+	* IE6,7,8,9均显示10。
+	* FF报错：octal literals and octal escape sequences are deprecated
+	* Chrome报错：Uncaught SyntaxError: Octal literals are not allowed in strict mode.
+	* Opera报错：Syntax error at line 3 while loading: Invalid character var num = 012;
+	* 如果使用严格模式，除了0（零）开头前缀8进制以外还有：
+	* 1.在代码中不能使用一些扩展的保留字：
+	* implements,interface,let,package,private,public,static,yield
+	* 2.with语句也不能使用。
+	* 3.不能声明或重写eval和arguments两个标识符。
+	* 4.不能用delete 删除显式声明的标识符，名称或具名函数。
+
+
 -  JavaScript原型，原型链 ? 有什么特点？
 
 -  eval是做什么的？ 
@@ -1355,6 +1387,7 @@ var person = new Person();
 	       if(a instanceof Person){
 	           alert('yes');
 	       }
+
 -  new操作符具体干了什么呢?
 
 			 1、创建一个空对象，并且 this 变量引用该对象，同时还继承了该函数的原型。
