@@ -219,6 +219,84 @@
 
 * 请写一个简单的幻灯效果页面
 	* 如果不使用JS来完成，可以加分。
+```html
+<!doctype html>
+<html>
+  <head>
+    <style>
+    img {
+      display: none;
+      width: 100px;
+      height: 100px;
+    }
+ 
+    input:checked + img {
+      display: block;
+    }
+ 
+    input {
+      position: absolute;
+      left: -9999px;
+    }
+ 
+    label {
+      cursor: pointer;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="cont">
+      <input id="img1" name="img" type="radio" checked="checked">
+      <img src="a.png">
+      <input id="img2" name="img" type="radio">
+      <img src="b.png">
+    </div>
+    <div id="nav">
+      <label for="img1">第一张</label>
+      <label for="img2">第二张</label>
+    </div>
+  </body>
+</html>
+```
+
+	* 还有用hash的方法,就是利用地址后面的#abc。
+
+```html
+<!DOCTYPE HTML>
+<html>
+  <head>
+  <style>
+ 
+  #cont {
+  position: relative;
+  height: 100px;
+  }
+img {
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      z-index: 1;
+    }
+img:first-child,
+img:target {
+      z-index: 2;
+    }
+ 
+ 
+  </style>
+  </head>
+  <body>
+  <div id="cont">
+      <img id="img1" src="a.jpg">
+      <img id="img2" src="b.jpg">
+    </div>
+    <div>
+      <a href="#img1">one</a>
+      <a href="#img2">two</a>
+    </div>
+  </body>
+</html>
+```
 
 * 你都使用哪些工具来测试代码的性能？
 	* [Profiler](http://www.2cto.com/kf/201204/126311.html), [JSPerf](http://jsperf.com/nexttick-vs-setzerotimeout-vs-settimeout), Dromaeo
@@ -318,7 +396,9 @@
 ....
 </div>
 ```
+
 	* 上面HTML代码提供了单个文章所拥有的一些属性。通过JS代码可以获得这些自定义的属性。
+
 ```html
 	var post = document.getElementsByTagName('div')[0];
 	post.dataset; // DOMStringMap
@@ -609,6 +689,7 @@ HTML5？
 	    <div id=”right”>Right</div>
 	</div>
 ```
+
 	* 此三种方法各有利弊，使用时应择优选择，比较之下第二种方法更为可取
 
 * 解释下 CSS sprites，以及你要如何在页面或网站中使用它。
