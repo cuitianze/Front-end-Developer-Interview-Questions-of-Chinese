@@ -15,6 +15,8 @@
   1. [其他问题](#other)
   1. [推荐网站](#web)
 
+#### [阿里寒冬面试题](http://blog.csdn.net/dyllove98/article/details/8981433)
+
 ####[[⬆]](#toc) <a name='contributors'>最初贡献者</a>
 
 这里大部分的面试题来源于 [darcyclarke/Front-end-Developer-Interview-Questions](https://github.com/darcyclarke/Front-end-Developer-Interview-Questions), 摘抄自 [Paul Irish](http://paulirish.com) ([@paul_irish](http://twitter.com/paul_irish)) 在 [oksoclap](http://oksoclap.com/) 创建的帖子，部分问题由 [博陵](http://崔天泽.中国) 整理而来。
@@ -825,8 +827,6 @@ HTML5？
   
 * 解释下浏览器是如何判断元素是否匹配某个 CSS 选择器？
 
-* 解释一下你对盒模型的理解，以及如何在 CSS 中告诉浏览器使用不同的盒模型来渲染你的布局。
-
 * 怎么样实现垂直居中？
 
 * 请解释一下 ```* { box-sizing: border-box; }``` 的作用, 并且说明使用它有什么好处？
@@ -852,6 +852,7 @@ HTML5？
 
 * 请问你有使用过 CSS Flexbox 或者 Grid specs 吗？
   * 如果有，请问在性能和效率的方面你是怎么看的？
+  * [深入了解 Flexbox 伸缩盒模型](http://www.w3cplus.com/blog/666.html)
 
 - 介绍一下CSS的盒子模型？
 
@@ -958,15 +959,17 @@ HTML5？
 - 一个满屏 品 字布局 如何设计?
 
 - 经常遇到的CSS的兼容性有哪些？原因，解决方法是什么？
-	[CSS兼容性常见问题总结](http://www.zhufengpeixun.cn/CSS/2011-08-25/142.html)
+	* [CSS兼容性常见问题总结](http://www.zhufengpeixun.cn/CSS/2011-08-25/142.html)
 
 - absolute的containing block计算方式跟正常流有什么不同？
 
 - position跟display、margin collapse、overflow、float这些特性相互叠加后会怎么样？
+	* [http://www.th7.cn/web/html-css/201405/37444.shtml](http://www.th7.cn/web/html-css/201405/37444.shtml)
 
 - 对BFC规范的理解？
 
-		（W3C CSS 2.1 规范中的一个概念,它决定了元素如何对其内容进行定位,以及与其他元素的关 系和相互作用。）
+		* （W3C CSS 2.1 规范中的一个概念,它决定了元素如何对其内容进行定位,以及与其他元素的关 系和相互作用。）
+
 - css定义的权重
 
 		以下是权重的规则：标签的权重为1，class的权重为10，id的权重为100，以下例子是演示各种定义的权重值：
@@ -991,15 +994,6 @@ HTML5？
 		} 
 		
 		如果权重相同，则最后定义的样式会起作用，但是应该避免这种情况出现
-
-
-- 解释下浮动和它的工作原理？清除浮动的技巧
-
-- 用过媒体查询，针对移动端的布局吗？
-
-- 使用 CSS 预处理器吗？喜欢那个？
-		
-		SASS 
 
 - 如果需要手动写动画，你认为最小时间间隔是多久，为什么？（阿里）
 
