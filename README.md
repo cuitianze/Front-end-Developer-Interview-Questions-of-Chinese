@@ -856,6 +856,254 @@ var person = new Person();
 
 * 什么是 `"use strict";` ? 使用它的好处和坏处分别是什么？
 
+
+-  JavaScript原型，原型链 ? 有什么特点？
+
+-  eval是做什么的？ 
+
+		它的功能是把对应的字符串解析成JS代码并运行；
+		应该避免使用eval，不安全，非常耗性能（2次，一次解析成js语句，一次执行）。
+
+-  null，undefined 的区别？
+
+-  写一个通用的事件侦听器函数。
+
+			// event(事件)工具集，来源：github.com/markyun
+			markyun.Event = {
+				// 页面加载完成后
+				readyEvent : function(fn) {
+					if (fn==null) {
+						fn=document;
+					}
+					var oldonload = window.onload;
+					if (typeof window.onload != 'function') {
+						window.onload = fn;
+					} else {
+						window.onload = function() {
+							oldonload();
+							fn();
+						};
+					}
+				},
+				// 视能力分别使用dom0||dom2||IE方式 来绑定事件
+				// 参数： 操作的元素,事件名称 ,事件处理程序
+				addEvent : function(element, type, handler) {
+					if (element.addEventListener) {
+						//事件类型、需要执行的函数、是否捕捉
+						element.addEventListener(type, handler, false);
+					} else if (element.attachEvent) {
+						element.attachEvent('on' + type, function() {
+							handler.call(element);
+						});
+					} else {
+						element['on' + type] = handler;
+					}
+				},
+				// 移除事件
+				removeEvent : function(element, type, handler) {
+					if (element.removeEnentListener) {
+						element.removeEnentListener(type, handler, false);
+					} else if (element.datachEvent) {
+						element.detachEvent('on' + type, handler);
+					} else {
+						element['on' + type] = null;
+					}
+				}, 
+				// 阻止事件 (主要是事件冒泡，因为IE不支持事件捕获)
+				stopPropagation : function(ev) {
+					if (ev.stopPropagation) {
+						ev.stopPropagation();
+					} else {
+						ev.cancelBubble = true;
+					}
+				},
+				// 取消事件的默认行为
+				preventDefault : function(event) {
+					if (event.preventDefault) {
+						event.preventDefault();
+					} else {
+						event.returnValue = false;
+					}
+				},
+				// 获取事件目标
+				getTarget : function(event) {
+					return event.target || event.srcElement;
+				},
+				// 获取event对象的引用，取到事件的所有信息，确保随时能使用event；
+				getEvent : function(e) {
+					var ev = e || window.event;
+					if (!ev) {
+						var c = this.getEvent.caller;
+						while (c) {
+							ev = c.arguments[0];
+							if (ev && Event == ev.constructor) {
+								break;
+							}
+							c = c.caller;
+						}
+					}
+					return ev;
+				}
+			}; 
+
+
+
+-  Node.js的适用场景？
+
+		高并发、聊天、实时消息推送
+
+-  介绍js的基本数据类型。
+
+		number,string,boolean,object,undefined
+	
+-  Javascript如何实现继承？
+
+		通过原型和构造器
+	
+-  ["1", "2", "3"].map(parseInt) 答案是多少？
+
+		 [1, NaN, NaN] 因为 parseInt 需要两个参数 (val, radix) 但 map 传了 3 个 (element, index, array)
+
+-  如何创建一个对象? （画出此对象的内存图）
+
+		  function Person(name, age) {
+		    this.name = name;
+		    this.age = age;
+		    this.sing = function() { alert(this.name) } 
+		  } 
+
+
+-  谈谈This对象的理解。
+
+		this是js的一个关键字，随着函数使用场合不同，this的值会发生变化。
+	
+	    但是有一个总原则，那就是this指的是调用函数的那个对象。
+		
+	    this一般情况下：是全局对象Global。 作为方法调用，那么this就是指这个对象	
+
+-  事件是？IE与火狐的事件机制有什么区别？ 如何阻止冒泡？ 
+
+		 1. 我们在网页中的某个操作（有的操作对应多个事件）。例如：当我们点击一个按钮就会产生一个事件。是可以被 JavaScript 侦测到的行为。  
+		 2. 事件处理机制：IE是事件冒泡、火狐是 事件捕获；
+		 3. ev.stopPropagation();
+
+-  什么是闭包（closure），为什么要用它？
+
+
+		执行say667()后,say667()闭包内部变量会存在,而闭包内部函数的内部变量不会存在.使得Javascript的垃圾回收机制GC不会收回say667()所占用的资源，因为say667()的内部函数的执行需要依赖say667()中的变量。这是对闭包作用的非常直白的描述.
+  
+		  function say667() {
+			// Local variable that ends up within closure
+			var num = 666;
+			var sayAlert = function() { alert(num); }
+			num++;
+			return sayAlert;
+		}
+		 
+		 var sayAlert = say667();
+		 sayAlert()//执行结果应该弹出的667  
+
+
+-  "use strict";是什么意思 ? 使用它的好处和坏处分别是什么？
+
+-  如何判断一个对象是否属于某个类？
+
+
+		
+ 		  使用instanceof （待完善）
+
+	       if(a instanceof Person){
+	           alert('yes');
+	       }
+-  new操作符具体干了什么呢?
+
+			 1、创建一个空对象，并且 this 变量引用该对象，同时还继承了该函数的原型。
+	  	  	 2、属性和方法被加入到 this 引用的对象中。
+	 		 3、新创建的对象由 this 所引用，并且最后隐式的返回 this 。
+		    
+		var obj  = {};
+		obj.__proto__ = Base.prototype;
+		Base.call(obj); 
+
+-  Javascript中，有一个函数，执行时对象查找时，永远不会去查找原型，这个函数是？
+  
+		hasOwnProperty
+
+-  JSON 的了解？
+		
+		JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式。
+		它是基于JavaScript的一个子集。数据格式简单, 易于读写, 占用带宽小
+        {'age':'12', 'name':'back'}
+
+-  js延迟加载的方式有哪些？
+		
+		defer和async、动态创建DOM方式（用得最多）、按需异步载入js
+
+		
+-  ajax 是什么? 
+
+-  同步和异步的区别?
+
+-  如何解决跨域问题?
+	 
+		jsonp、 iframe、window.name、window.postMessage、服务器上设置代理页面
+-  模块化怎么做？
+
+
+		
+	 [ 立即执行函数](http://benalman.com/news/2010/11/immediately-invoked-function-expression/),不暴露私有成员
+		
+		    var module1 = (function(){
+		    　　　　var _count = 0;
+		    　　　　var m1 = function(){
+		    　　　　　　//...
+		    　　　　};
+		    　　　　var m2 = function(){
+		    　　　　　　//...
+		    　　　　};
+		    　　　　return {
+		    　　　　　　m1 : m1,
+		    　　　　　　m2 : m2
+		    　　　　};
+		    　　})(); 
+
+-  AMD（Modules/Asynchronous-Definition）、CMD（Common Module Definition）规范区别？
+
+-  异步加载的方式有哪些？
+
+			
+	      (1) defer，只支持IE
+	      
+	      (2) async：
+	      
+	      (3) 创建script，插入到DOM中，加载完毕后callBack
+	  
+- documen.write和 innerHTML的区别
+			  
+document.write只能重绘整个页面
+
+innerHTML可以重绘页面的一部分
+		  
+
+-  .call() 和 .apply() 的区别？
+
+						
+		  例子中用 add 来替换 sub，add.call(sub,3,1) == add(3,1) ，所以运行结果为：alert(4); 
+		
+		  注意：js 中的函数其实是对象，函数名是对 Function 对象的引用。
+		 
+			function add(a,b)
+			{
+			    alert(a+b);
+			}
+			
+			function sub(a,b)
+			{
+			    alert(a-b);
+			}
+			
+			add.call(sub,3,1);  
+			
 ####[[⬆]](#toc) <a name='jquery'>jQuery 相关问题：</a>
 
 * 解释"chaining"。
