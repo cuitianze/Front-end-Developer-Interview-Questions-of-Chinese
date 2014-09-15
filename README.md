@@ -958,11 +958,13 @@ HTML5？
           增加了更多的CSS选择器  多背景 rgba 
 
 - 一个满屏 品 字布局 如何设计?
+	* 首先划分成头部、body、脚部
 
 - 经常遇到的CSS的兼容性有哪些？原因，解决方法是什么？
 	* [CSS兼容性常见问题总结](http://www.zhufengpeixun.cn/CSS/2011-08-25/142.html)
 
 - absolute的containing block计算方式跟正常流有什么不同？
+	* [视觉格式化模型](https://developer.mozilla.org/zh-CN/docs/Web/CSS/Visual_formatting_model)
 
 - position跟display、margin collapse、overflow、float这些特性相互叠加后会怎么样？
 	* [http://www.th7.cn/web/html-css/201405/37444.shtml](http://www.th7.cn/web/html-css/201405/37444.shtml)
@@ -1017,6 +1019,7 @@ HTML5？
  return e.target || e.srcElement;
  }
  ```
+ 	* 事件代理，比如，我要点一个table中的td时编辑，那么我们会在td上绑定事件呢还是table上，如果在td上绑定，会产生非常多的事件，对内存来说是个不小的考验，所以我们选择在table中绑定。因为js中有些事件是冒泡的，比如onclick。
 
 
 * 解释下 JavaScript 中 `this` 是如何工作的。
@@ -1026,13 +1029,42 @@ HTML5？
 	* 普通的函数调用，函数调用被谁调用，this指的就是谁。
 
 * 解释下原型继承的原理。
+	* [JavaScript原型继承工作原理](http://developer.51cto.com/art/201309/410991.htm)
+	* [理解Javascript_05_原型继承原理](http://www.cnblogs.com/fool/archive/2010/10/13/1849734.html)
+	* 当查找一个对象的属性时，JavaScript 会向上遍历原型链，直到找到给定名称的属性为止。(大多数JavaScript的实现用 __proto__ 属性来表示一个对象的原型链。)
+
+	* 以下代码展示了JS引擎如何查找属性：
+
+```javascript
+function getProperty(obj, prop) {
+
+    if (obj.hasOwnProperty(prop))
+
+        return obj[prop]
+
+    else if (obj.__proto__ !== null)
+
+        return getProperty(obj.__proto__, prop)
+
+    else
+
+        return undefined
+
+}
+```
+	* 注：__proto__ 是一个不应在你代码中出现的非正规的用法，这里仅仅用它来解释JavaScript原型继承的工作原理。
 
 * 你是如何测试JavaScript代码的？
+	* [如何用Qunit测试你的JavaScript代码](http://www.woiweb.net/how-to-test-your-javascript-code-with-qunit.html)
 
 * AMD vs. CommonJS？
 	* AMD是依赖提前加载,CMD是依赖延时加载
+	* [JavaScript模块化编程 - CommonJS, AMD 和 RequireJS之间的关系](http://www.2cto.com/kf/201401/270303.html)
 
 * 什么是哈希表？
+	* 哈希表（Hash table，也叫散列表），是根据关键码值(Key value)而直接进行访问的数据结构。也就是说，它通过把关键码值映射到表中一个位置来访问记录，以加快查找的速度。这个映射函数叫做散列函数，存放记录的数组叫做散列表。说白了哈希表的原理其实就是通过空间换取时间的做法。。
+    * 哈希表的做法其实很简单，就是把Key通过一个固定的算法函数既所谓的哈希函数转换成一个整型数字，然后就将该数字对数组长度进行取余，取余结果就当作数组的下标，将value存储在以该数字为下标的数组空间里。
+    *  而当使用哈希表进行查询的时候，就是再次使用哈希函数将key转换为对应的数组下标，并定位到该空间获取value，如此一来，就可以充分利用到数组的定位性能进行数据定位。。
 
 * 解释下为什么接下来这段代码不是 IIFE(立即调用的函数表达式)：`function foo(){ }();`. 
   * 要做哪些改动使它变成 IIFE?
@@ -1046,18 +1078,39 @@ HTML5？
   	* 用typeof判断undefined，==，！=null判断Null..
 
 * 什么是闭包，如何使用它，为什么要使用它？
+	* [JS 闭包是什么，如何使用它，为什么要使用它？ 你喜欢的使用闭包的模式是什么？](http://bbs.blueidea.com/home.php?mod=space&uid=351999&do=blog&id=29210)
+	* [学习Javascript闭包（Closure） 阮一峰](http://www.ruanyifeng.com/blog/2009/08/learning_javascript_closures.html)
+	* 闭包就是能够读取其他函数内部变量的函数。
+	* 闭包可以用在许多地方。它的最大用处有两个，一个是前面提到的可以读取函数内部的变量，另一个就是让这些变量的值始终保持在内存中。
+
+	* 函数数再定义一个函数，用于返回里面的值，
+
+	* 你喜欢的使用闭包的模式是什么？
+		* 两种模式用在不同场合。参见jQuery源码，立即调用模式，把$的jQuery源码放在了全局作用域下。返回函数类型的，制作一个随时可以使用的函数。
+	　　* 闭包与设计模式
+		* 单例模式，例如要做一个荫罩层，这个时候我们需要一个全局变量来判断页面是否已经存在这样一个东西，如果就用一个var a 定义，那么就会污染全局命名空间。最好的作法，就是把这样一个变旦放在一个函数里面，然后通过函数内的函数去判断调用写它的逻辑。
 
 * 闭包会带来什么问题？怎么避免？
+	* 使用闭包的注意点
+		1）由于闭包会使得函数中的变量都被保存在内存中，内存消耗很大，所以不能滥用闭包，否则会造成网页的性能问题，在IE中可能导致内存泄露。解决方法是，在退出函数之前，将不使用的局部变量全部删除。
+		2）闭包会在父函数外部，改变父函数内部变量的值。所以，如果你把父函数当作对象（object）使用，把闭包当作它的公用方法（Public Method），把内部变量当作它的私有属性（private value），这时一定要小心，不要随便改变父函数内部变量的值。
 
 * 请举出一个匿名函数的典型用例？
+```javascript
+$.("input").each(function(e){this.val('OK')});
+```
 
 * 解释 “JavaScript 模块模式” 以及你在何时使用它。
+	* 我们在做radf库的时候，把所有的函数写在var function =  radf(){}里，为的是在全局作用域下，只有一个radf对象，所有的属性和方法全在radf命名空间下面。这样就是一个无污染的环境。
   * 如果有提到无污染的命名空间，可以考虑加分。
   * 如果你的模块没有自己的命名空间会怎么样？
   
 * 你是如何组织自己的代码？是使用模块模式，还是使用经典继承的方法？
+	* 在模块模式中使用继承。例如我们的库中有pannel布局型组件和data型组件，其余都依照这两个基本组件继承而来。
 
 * 请指出 JavaScript 宿主对象和原生对象的区别？
+	* 浏览器环境就是一个宿主，例如ie和ff就是两个不同的宿主环境，里面有一些方法和解释编译的差异性。document、body就是这样的对象。
+	* 内置对象就是w3c那个啥组织规定的一些对象，不管任何浏览器都应该有的，例如Array、Object等，当然ie6这种水货很有可能没有。！！！
 
 * 指出下列代码的区别：
 ```javascript
@@ -1065,14 +1118,21 @@ function Person(){}
 var person = Person(); 
 var person = new Person();
 ```
+	* 1、定义一个函数为Person()　　2、定义一个匿名函数指向person　　3、实例化一个person、原型来自于函数Person
 
 * `.call` 和 `.apply` 的区别是什么？
+	* 参数不同。call是给每个argument，.apply是給一个参数组数。
 
 * 请解释 `Function.prototype.bind` 的作用？
 
 * 你何时优化自己的代码？
+	* [JavaScript代码优化](http://www.lyblog.net/2013/209.html)
 
 * 你能解释一下 JavaScript 中的继承是如何工作的吗？
+	* [原型继承](http://www.2cto.com/kf/201404/296276.html)
+	* 创建了一个实例。这个实例是一个具有__proto__属性的空对象，并且__proto__指向F.prototype
+	* 初始化实例。将arguments 和 this赋予函数F。
+	* 返回这个实例。
 
 * 在什么时候你会使用 `document.write()`？
 	* 大多数生成的广告代码依旧使用 `document.write()`，虽然这种用法会让人很不爽。
@@ -1080,45 +1140,67 @@ var person = new Person();
 * 请指出浏览器特性检测，特性推断和浏览器 UA 字符串嗅探的区别？
 
 * 请尽可能详尽的解释 AJAX 的工作原理。
+	* 非ajax是把要提交的内容放在submit里面，浏览器刷新提交数据。ajax即异步数据刷新，将要提交的数据与服务器接口交换数据，将得到的数据返回用于重组dom元素，以及改变一些页面效果。
+	* 动态添加script标签，script是不存在跨域问题的，所以可以跨域以get方式访问异域的数据。要跨域以post方式，需要使用iframe标签。ajax是使用XMLHttpRequest来和服务器进行异步通信，所以原理完全不同。
 
 * 请解释 JSONP 的工作原理，以及它为什么不是真正的 AJAX。
 
 * 你使用过 JavaScript 模板系统吗？
 	* 如有使用过，请谈谈你都使用过哪些库，比如 Mustache.js，Handlebars 等等。
+	* 大量的正则表达式用于替换掉html中代表数据的内容。生成静态的html页面
 
 * 请解释变量声明提升。
+	* 在中间声明的函数，会提升到最先去声明，但是赋值位置不会提升。
 
 * 请描述下事件冒泡机制。
+	* 点击document中的div ，也会触发到document的click事件，这就是冒泡啦，！如果要停止冒泡，ie下e.returnValue = false。ff下,stop啥的。
 
 * "attribute" 和 "property" 的区别是什么？
 
 * 为什么扩展 JavaScript 内置对象不是好的做法？
+	* 每一个对象都有这个方法，有时候是多余的。
 
 * 为什么扩展 JavaScript 内置对象是好的做法？
+	* 方便使用，不用记新的命名空间，直接在对象后面点就行了。
 
 * 请指出 document load 和 document ready 两个事件的区别。
+	* ready是在dom加载之后，图片加载之前，load是所有东西准备就绪之后。
 
 * `==` 和 `===` 有什么不同？
+	* 三个等的话，是要求类型也相同，1==true是ok的，但是1===true是false;
 
 * 你如何从浏览器的 URL 中获取查询字符串参数。
+	* location.href就是地址。再用正则或substring提取。
 
 * 请解释一下 JavaScript 的同源策略。
+	* 域名，协议，端口相同才能被执行。防止其它网页对不同域不同协议不同端口网页的修改。
 
-* 请描述一下 JavaScript 的继承模式。
+* 请描述一下JavaScript的继承模式。
+	* 我只用一种哈。就是把子类的prototype继承父类。   例 ： children.prototype = new perent();
 
 * 如何实现下列代码：
 ```javascript
 [1,2,3,4,5].duplicator(); // [1,2,3,4,5,1,2,3,4,5]
 ```
+```javascript 
+	Array.prototype.duplicator = function(){
+	　　var l = this.length,i;
+	　　for(i=0;i<l;i++){
+	　　　this.push(this[i])　
+   		}
+	}
+```
 
 * 描述一种 JavaScript 中实现 memoization(避免重复运算)的策略。
+	* 开定时器
 
 * 什么是三元表达式？“三元” 表示什么意思？
+	* a>b?a:b
 
 * 函数的参数元是什么？
 
 * 什么是 `"use strict";` ? 使用它的好处和坏处分别是什么？
-
+	* 严格模式会导致出现错误就终止了。 开发时候使用一下可以防bug.
 
 -  JavaScript原型，原型链 ? 有什么特点？
 
@@ -1266,12 +1348,7 @@ var person = new Person();
 		 var sayAlert = say667();
 		 sayAlert()//执行结果应该弹出的667  
 
-
--  "use strict";是什么意思 ? 使用它的好处和坏处分别是什么？
-
 -  如何判断一个对象是否属于某个类？
-
-
 		
  		  使用instanceof （待完善）
 
@@ -1302,17 +1379,13 @@ var person = new Person();
 		
 		defer和async、动态创建DOM方式（用得最多）、按需异步载入js
 
-		
--  ajax 是什么? 
 
 -  同步和异步的区别?
 
--  如何解决跨域问题?
-	 
+-  如何解决跨域问题?	 
 		jsonp、 iframe、window.name、window.postMessage、服务器上设置代理页面
+
 -  模块化怎么做？
-
-
 		
 	 [ 立即执行函数](http://benalman.com/news/2010/11/immediately-invoked-function-expression/),不暴露私有成员
 		
@@ -1443,7 +1516,6 @@ jQuery中没有提供这个功能，所以你需要先编写两个jQuery的扩�
          for (var i = size, length = arr.length; i < length; i++) {}
 
 
--  JavaScript中的作用域与变量声明提升？ 
 
 -  如何编写高性能的Javascript？
 
@@ -1525,10 +1597,10 @@ foo.push(2);
 - 列举IE 与其他浏览器不一样的特性？
 
 - 99%的网站都需要被重构是那本书上写的？
-
-- 什么叫优雅降级和渐进增强？
+	* 《重构之美》
 
 - WEB应用从服务器主动推送Data到客户端有那些方式？
+	* [Web端服务器推送技术原理分析及dwr框架简单的使用](http://blog.csdn.net/wiki2star/article/details/17306607)
 
 - 对Node的优点和缺点提出了自己的看法？
 
@@ -1543,7 +1615,6 @@ foo.push(2);
 
 
 - 你有哪些性能优化的方法？
-
 
 		 （看雅虎14条性能优化原则）。
 	
@@ -1573,7 +1644,6 @@ foo.push(2);
 
 - 一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？（流程说的越详细越好）
 
-
 			查找浏览器缓存 
 		    DNS解析、查找该域名对应的IP地址、重定向（301）、发出第二个GET请求
 		    进行HTTP协议会话
@@ -1589,9 +1659,10 @@ foo.push(2);
 			
 			解析：对加载到的资源（HTML、JS、CSS等）进行语法解析，建议相应的内部数据结构（比如HTML的DOM树，JS的（对象）属性表，CSS的样式规则等等）
 			}
+
 - 除了前端以外还了解什么其它技术么？你最最厉害的技能是什么？
 
-- 你常用的开发工具是什么，为什么？
+- 你常用的开发工具是什么，为什么？ sublime
 
 - 对前端界面工程师这个职位是怎么样理解的？它的前景会怎么样？
 
@@ -1612,6 +1683,7 @@ foo.push(2);
          处理hack，兼容、写出优美的代码格式；
         
          针对服务器的优化、拥抱最新前端技术。
+
 - 加班的看法？
 
 
@@ -1634,6 +1706,7 @@ foo.push(2);
 				JS 分文件夹存放 命名以该JS功能为准的英文翻译。
 			
 				图片采用整合的 images.png png8 格式文件使用 尽量整合在一起使用方便将来的管理
+
 - 如何设计突发大规模并发架构？
 
 
@@ -1647,19 +1720,10 @@ foo.push(2);
 			利用选择代替输入、标签及文字的排布方式、
 			依靠明文确认密码、合理的键盘利用、
 
-- 你在现在的团队处于什么样的角色，起到了什么明显的作用？
 
 - 你认为怎样才是全端工程师（Full Stack developer）？ 
 
 
-- 介绍一个你最得意的作品吧？
-
-- 你的优点是什么？缺点是什么？
-
-- 如何管理前端团队?
-
-
-- 最近在学什么？能谈谈你未来3，5年给自己的规划吗？
 
 - 想问公司的问题？
 		
