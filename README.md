@@ -221,7 +221,7 @@
 	* 如果不使用JS来完成，可以加分。
 
 * 你都使用哪些工具来测试代码的性能？
-	* Profiler, JSPerf, Dromaeo
+	* [Profiler](http://www.2cto.com/kf/201204/126311.html), [JSPerf](http://jsperf.com/nexttick-vs-setzerotimeout-vs-settimeout), Dromaeo
 
 * 如果今年你打算熟练掌握一项新技术，那会是什么？
 	* nodejs, Famo.us
@@ -292,6 +292,10 @@
 * 如果网页内容需要支持多语言，你会怎么做？
 	* 采用统一编码UTF-8模式
 	* 在设计和开发多语言网站时，有哪些问题你必须要考虑？
+		*  
+			1、应用字符集的选择
+			2、语言书写习惯&导航结构 
+			3、数据库驱动型网站
 	    1、应用字符集的选择
 		    一个定位于不同语言国家的企业网站势必需要提供多种语言版本的产品和销售信息来满足其世界各地使用不同语言的客户和合作伙伴，其中包括法语、德语、意大利语、葡萄牙语、西班牙语、阿拉伯语等等。但有一个问题却极易被网站设计者们所忽略。这就是网站的字符集设置问题。
 		    一般我们使用的是简体中文(GB2312)字符集，而对多语言网站来说，中文字符集却可能会使你辛辛苦苦的努力功亏一篑。原因很简单：就是这个毫不起眼的小小字符集在作怪。
@@ -301,9 +305,9 @@
 		    √: <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		    ×: <meta http-equiv="Content-Type" content="text/html; charset=gb2312"> 
 		    这一步非常重要，原因在于若等页面做好之后再更改字符集设置，可说是一件非常非常吃力不讨好的工作，有时候甚至可能需要从头再来，重新输入网站的文字内容。
-		   	2、语言书写习惯&导航结构
+		* 2、语言书写习惯&导航结构
 		    有些国家的语言书写习惯是从右到左，例如许多中东地区所使用的阿拉伯语，波斯语和希伯来语等等。如果你的市场目标是这些语言的国家，那么在网站设计中就需要考虑这些特殊的语言书写习惯。而且如果你在网站导航结构设计中使用的是一个竖直导航栏，这时候就应该把它放在右边，而不是象我们习惯的那样放在左边了。
-		    3、数据库驱动型网站
+		* 3、数据库驱动型网站
 		    对一个数据库驱动型的网站，尤其是当客户可以留言并向数据库添加信息时，则应当考虑如何从技术上实现对不同语言数据信息的收集和检索。
 
 * `data-`属性的作用是什么？
@@ -580,7 +584,7 @@ HTML5？
 		table { border-collapse:collapse; border-spacing:0; } 
 
 * 解释下浮动和它的工作原理。
-
+	* 浮动元素脱离文档流，不占据空间。浮动元素碰到包含它的边框或者浮动元素的边框停留。[link](http://blog.sina.com.cn/s/blog_5809ec9801009dku.html)
 
 * 列举不同的清除浮动的技巧，并指出它们各自适用的使用场景。
 	* 1.使用空标签清除浮动。
@@ -611,6 +615,8 @@ HTML5？
 	* CSS Sprites其实就是把网页中一些背景图片整合到一张图片文件中，再利用CSS的“background-image”，“background- repeat”，“background-position”的组合进行背景定位，background-position可以用数字能精确的定位出背景图片的位置。
 
 * 你最喜欢的图片替换方法是什么，你如何选择使用。
+	* \<h2> \<span 图片丢这里>\</span>Hello World \</h2> * 把span背景设成文字内容，这样又可以保证seo，也有图片的效果在上面。
+	*  一般都是：alt，title，onerror
 
 * 讨论CSS hacks，条件引用或者其他。
 	* 在这个浏览器百花争鸣的时代，作为前端开发的我们为了我们漂亮的设计能适应各个浏览器可为煞费苦心，主要体现在javascript和css上面。javascript我这次就不谈了，先说说css。
@@ -660,12 +666,36 @@ HTML5？
 }
 ```
 * 你用过栅格系统吗？如果使用过，你最喜欢哪种？
+	* 比如：Bootstrap，流式栅格系统，http://960.gs/ ，[栅格系统延续美学](http://mux.baidu.com/?p=1550)
 
 * 你用过媒体查询，或针对移动端的布局/CSS 吗？
+	* @media screen and (min-width: 400px) and (max-width: 700px) { … }
+ 	* @media handheld and (min-width: 20em), screen and (min-width: 20em) { … }
 
 * 你熟悉 SVG 样式的书写吗？
+```SVG
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> 
+ <circle cx="40" cy="40" r="24" style="stroke:#006600; fill:#00cc00"/>
+ <text x="250" y="150" font-family="Verdana" font-size="10px" fill="blue">Hello, out there</text>
+ <defs><style type="text/css"> <![CDATA[.sample{stroke:blue;fill:#0080FF;opacity:1;}]]></style></defs>
+ <use xlink:href="#sample1" class="sample"/>
+ </svg>
+```
 
 * 如何优化网页的打印样式？
+```html
+	 <link rel="stylesheet" type="text/css" media="screen" href="xxx.css" />
+```	
+	 * 其中media指定的属性就是设备，显示器上就是screen，打印机则是print，电视是tv，投影仪是projection。
+```html	 
+	 <link rel="stylesheet" type="text/css" media="print" href="yyy.css" />
+```
+	 * 但打印样式表也应有些注意事项：
+		 1、打印样式表中最好不要用背景图片，因为打印机不能打印CSS中的背景。如要显示图片，请使用html插入到页面中。
+		 2、最好不要使用像素作为单位，因为打印样式表要打印出来的会是实物，所以建议使用pt和cm。
+		 3、隐藏掉不必要的内容。（@print div{display:none;}）
+		 4、打印样式表中最好少用浮动属性，因为它们会消失。
+		 如果想要知道打印样式表的效果如何，直接在浏览器上选择打印预览就可以了。
 	* CSS控制网页打印样式： 
 		* media 定义和用法： 
 		* media 属性规定被链接文档将显示在什么设备上。 
@@ -695,6 +725,13 @@ HTML5？
 ```
 
 * 在书写高效 CSS 时会有哪些问题需要考虑？
+	1. 样式是：从右向左的解析一个选择器
+	2. ID最快，Universal最慢 有四种类型的key selector，解析速度由快到慢依次是：ID、class、tag和universal
+	3. 不要tag-qualify （永远不要这样做 ul#main-navigation { } ID已经是唯一的，不需要Tag来标识，这样做会让选择器变慢。）
+	4. 后代选择器最糟糕（换句话说，下面这个选择器是很低效的： html body ul li a { }）
+	5. 想清楚你为什么这样写
+	6. CSS3的效率问题（CSS3选择器（比如 :nth-child）能够漂亮的定位我们想要的元素，又能保证我们的CSS整洁易读。但是这些神奇的选择器会浪费很多的浏览器资源。）
+	7. 我们知道#ID速度是最快的，那么我们都用ID，是不是很快。但是我们不应该为了效率而牺牲可读性和可维护性
 
 * 使用 CSS 预处理器的优缺点有哪些？(SASS，Compass，Stylus，LESS)
   * 描述下你曾经使用过的 CSS 预处理的优缺点。
