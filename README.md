@@ -1144,6 +1144,7 @@ var person = new Person();
 	* 动态添加script标签，script是不存在跨域问题的，所以可以跨域以get方式访问异域的数据。要跨域以post方式，需要使用iframe标签。ajax是使用XMLHttpRequest来和服务器进行异步通信，所以原理完全不同。
 
 * 请解释 JSONP 的工作原理，以及它为什么不是真正的 AJAX。
+	* JSON是一种数据交换格式，而JSONP是一种依靠开发人员的聪明才智创造出的一种非官方跨域数据交互协议。我们拿最近比较火的谍战片来打个比方，JSON是地下党们用来书写和交换情报的“暗号”，而JSONP则是把用暗号书写的情报传递给自己同志时使用的接头方式。看到没？一个是描述信息的格式，一个是信息传递双方约定的方法。
 
 * 你使用过 JavaScript 模板系统吗？
 	* 如有使用过，请谈谈你都使用过哪些库，比如 Mustache.js，Handlebars 等等。
@@ -1156,6 +1157,8 @@ var person = new Person();
 	* 点击document中的div ，也会触发到document的click事件，这就是冒泡啦，！如果要停止冒泡，ie下e.returnValue = false。ff下,stop啥的。
 
 * "attribute" 和 "property" 的区别是什么？
+	* DOM元素含有的这两个东西，虽然完全不是一回事，但却又紧密联系在一体，不细细体会，还真不好分清。Property-属性，就像C#等高级语言可以.(dot)获取或者设置其值；Attribute-特性，每一个dom元素都有一个attributes属性来存放所有的attribute节点，通过getAttribute()和setAttribute()方法来进行获取和操作。
+	* [js中Property和Attribute的区别是什么](http://www.kqiqi.com/knowledge/program/1078.html)
 
 * 为什么扩展 JavaScript 内置对象不是好的做法？
 	* 每一个对象都有这个方法，有时候是多余的。
@@ -1233,15 +1236,11 @@ var person = new Person();
 	* 3.不能声明或重写eval和arguments两个标识符。
 	* 4.不能用delete 删除显式声明的标识符，名称或具名函数。
 
-
--  JavaScript原型，原型链 ? 有什么特点？
-
 -  eval是做什么的？ 
 
 		它的功能是把对应的字符串解析成JS代码并运行；
 		应该避免使用eval，不安全，非常耗性能（2次，一次解析成js语句，一次执行）。
 
--  null，undefined 的区别？
 
 -  写一个通用的事件侦听器函数。
 
@@ -1414,6 +1413,13 @@ var person = new Person();
 
 
 -  同步和异步的区别?
+	* javascript 异步表示async，指：代码执行不按顺序，‘跳过’执行，待其他某些代码执行完后，再来执行，称为“异步”。
+ 
+	* javascript同步表示sync，指：代码依次执行。
+ 
+	* javascript所谓的“线程”，就是这样一种概念
+ 
+	* 这种情况容易出现在 ajax 当中，因为ajax最可能，也最多用到async 或者 sync的概念属性。
 
 -  如何解决跨域问题?	 
 		jsonp、 iframe、window.name、window.postMessage、服务器上设置代理页面
@@ -1481,8 +1487,10 @@ innerHTML可以重绘页面的一部分
 
 
 * 解释"deferreds"。
+	* [jQuery的deferred对象详解](http://www.ruanyifeng.com/blog/2011/08/a_detailed_explanation_of_jquery_deferred_object.html)
 
 * 你知道哪些针对 jQuery 的优化方法。
+	* [jQuery的性能优化](http://www.open-open.com/lib/view/open1388202452360.html)
 
 * 请解释 `.end()` 的用途。
 	* 可以一次操作多个元素，而且end( )就是要返回前一个对象，重新再选择一次
@@ -1499,6 +1507,7 @@ innerHTML可以重绘页面的一部分
 返回的是jQuery对象，就可以继续调用其他方法，返回的是html数组就不能调用jQuery的其他方法
 
 * 请指出 `.bind()`，`.live()` 和 `.delegate()` 的区别。
+	* [Query的.bind()、.live()和.delegate()之间区别](http://www.cnblogs.com/leejersey/archive/2013/08/12/3253964.html)
 
 * 请指出 `$` 和 `$.fn` 的区别，或者说出 `$.fn` 的用途。
 	* jQuery.extend() 的调用并不会把方法扩展到对象的实例上，引用它的方法也需要通过jQuery类来实现，如jQuery.init()
@@ -1519,11 +1528,13 @@ $(".foo div#bar:eq(0)")
 
 
 -  JQuery的源码看过吗？能不能简单说一下它的实现原理？
+	* 在 jQuery 中， jQuery 对象实际上是一个仿数组的对象，代表通过选择器得到的所有 DOM 对象的集合，它像数组一样有 length 属性，表示代表的 DOM 对象的个数，还可以通过下标进行遍历。 
+	* 95 行的 jQuery.each 是 jQuery 中用来遍历这个仿数组，对其中的每个元素进行遍历处理的基本方法，callback 表示处理这个 DOM 对象的函数。通常情况下，我们并不使用这个方法，而是使用 jQuery 对象的 each 方法进行遍历。jQuery 对象的 css 和 text 方法在内部实际上使用 jQuery 对象的 each 方法对所选择的元素进行处理。 
 
 -  jquery 中如何将数组转化为json字符串，然后再转化回来？
-
+	* [知乎](http://www.zhihu.com/question/22443850)
 			
-jQuery中没有提供这个功能，所以你需要先编写两个jQuery的扩展：
+	* jQuery中没有提供这个功能，所以你需要先编写两个jQuery的扩展：
  
 		$.fn.stringifyArray = function(array) {
 		    return JSON.stringify(array)
@@ -1551,10 +1562,10 @@ jQuery中没有提供这个功能，所以你需要先编写两个jQuery的扩�
 
 
 -  如何编写高性能的Javascript？
+	* [编写高性能JavaScript](http://www.topthink.com/topic/3316.html)
+	* [浅谈编写高性能的Javascript代码](http://developer.51cto.com/art/200906/131335.htm)
 
 -  那些操作会造成内存泄漏？
-
-
 			 
 	    内存泄漏指任何对象在您不再拥有或需要它之后仍然存在。
         垃圾回收器定期扫描对象，并计算引用了每个对象的其他对象的数量。如果一个对象的引用数量为 0（没有其他对象引用过该对象），或对该对象的惟一引用是循环的，那么该对象的内存即可回收。
@@ -1563,6 +1574,10 @@ jQuery中没有提供这个功能，所以你需要先编写两个jQuery的扩�
 		闭包、控制台日志、循环（在两个对象彼此引用且彼此保留时，就会产生一个循环）
 
 -  JQuery一个对象可以同时绑定多个事件，这是如何实现的？
+	1、jQuery("#id").click(func1).mouseover(func2)//方法连写，func为方法的名字
+	2、jQuery("#id").click(function(){//你的具体方法实现}),mouser(function(){//你的具体方法实现});
+	3、jQuery("#id").bind("click mouseover",func)//两个事件中间有空格 ，func为方法的名字
+	4、jQuery("#id").bind("load scroll",function(){//你的具体方法实现});
 
 - 如何判断当前脚本运行在浏览器还是node环境中？（阿里）
 			
