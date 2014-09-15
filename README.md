@@ -237,7 +237,20 @@
 	* 在设计和开发多语言网站时，有哪些问题你必须要考虑？
 
 * `data-`属性的作用是什么？
-	* data-为前端开发者提供自定义的属性，这些属性集可以通过对象的dataset属性获取，不支持该属性的浏览器可以通过 getAttribute方法获取。
+	* data-为前端开发者提供自定义的属性，这些属性集可以通过对象的dataset属性获取，不支持该属性的浏览器可以通过 getAttribute方法获取。ppk提到过使用rel属性，lightbox库推广了rel属性，HTML5提供了data-做替代，这样可以更好 地使用自定义的属性。
+```html
+<div data-author="david" data-time="2011-06-20"
+          data-comment-num="10"  data-category="javascript">
+....
+</div>
+```
+	* 上面HTML代码提供了单个文章所拥有的一些属性。通过JS代码可以获得这些自定义的属性。
+```html
+	var post = document.getElementsByTagName('div')[0];
+	post.dataset; // DOMStringMap
+	post.dataset.commentNum; // 10
+```	
+
 
 * 如果把 HTML5 看作做一个开放平台，那它的构建模块有哪些？
 	*　\<nav>, \<header>, \<section>, \<footer>
@@ -471,12 +484,61 @@ HTML5？
 ####[[⬆]](#toc) <a name='css'>CSS 相关问题：</a>
 
 * 描述下 “reset” CSS 文件的作用和使用它的好处。
+- 为什么要初始化CSS样式。
+
+		- 因为浏览器的兼容问题，不同浏览器对有些标签的默认值是不同的，如果没对CSS初始化往往会出现浏览器之间的页面显示差异。
+	
+		- 当然，初始化样式会对SEO有一定的影响，但鱼和熊掌不可兼得，但力求影响最小的情况下初始化。
+
+		*最简单的初始化方法就是： * {padding: 0; margin: 0;} （不建议）
+	
+		淘宝的样式初始化： 
+		body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }
+		body, button, input, select, textarea { font:12px/1.5tahoma, arial, \5b8b\4f53; }
+		h1, h2, h3, h4, h5, h6{ font-size:100%; }
+		address, cite, dfn, em, var { font-style:normal; }
+		code, kbd, pre, samp { font-family:couriernew, courier, monospace; }
+		small{ font-size:12px; }
+		ul, ol { list-style:none; }
+		a { text-decoration:none; }
+		a:hover { text-decoration:underline; }
+		sup { vertical-align:text-top; }
+		sub{ vertical-align:text-bottom; }
+		legend { color:#000; }
+		fieldset, img { border:0; }
+		button, input, select, textarea { font-size:100%; }
+		table { border-collapse:collapse; border-spacing:0; } 
 
 * 解释下浮动和它的工作原理。
 
+
 * 列举不同的清除浮动的技巧，并指出它们各自适用的使用场景。
+	* 1.使用空标签清除浮动。
+	   * 这种方法是在所有浮动标签后面添加一个空标签 定义css clear:both. 弊端就是增加了无意义标签。
+	* 2.使用overflow。
+	  *  给包含浮动元素的父标签添加css属性 overflow:auto; zoom:1; zoom:1用于兼容IE6。
+	* 3.使用after伪对象清除浮动。
+	   * 该方法只适用于非IE浏览器。具体写法可参照以下示例。使用中需注意以下几点。一、该方法中必须为需要清除浮动元素的伪对象中设置 height:0，否则该元素会比实际高出若干像素；二、content属性是必须的，但其值可以为空，蓝色理想讨论该方法的时候content属性的值 设为”.”，但我发现为空亦是可以的。
+```html	  
+	<style type=”text/css”>
+	<!–
+	    *{margin:0;padding:0;}
+	    body{font:36px bold; color:#F00; text-align:center;}
+	    #layout{background:#FF9;}
+	    #layout:after{display:block;clear:both;content:”";visibility:hidden;height:0;}
+	    #left{float:left;width:20%;height:200px;background:#DDD;line-height:200px;}
+	    #right{float:right;width:30%;height:80px;background:#DDD;line-height:80px;}
+	–>
+	</style>
+	<div id=”layout”>
+	    <div id=”left”>Left</div>
+	    <div id=”right”>Right</div>
+	</div>
+```
+	* 此三种方法各有利弊，使用时应择优选择，比较之下第二种方法更为可取
 
 * 解释下 CSS sprites，以及你要如何在页面或网站中使用它。
+	* CSS Sprites其实就是把网页中一些背景图片整合到一张图片文件中，再利用CSS的“background-image”，“background- repeat”，“background-position”的组合进行背景定位，background-position可以用数字能精确的定位出背景图片的位置。
 
 * 你最喜欢的图片替换方法是什么，你如何选择使用。
 
@@ -706,34 +768,6 @@ HTML5？
 
 - 经常遇到的CSS的兼容性有哪些？原因，解决方法是什么？
 	[CSS兼容性常见问题总结](http://www.zhufengpeixun.cn/CSS/2011-08-25/142.html)
-
-
-- 为什么要初始化CSS样式。
-
-		- 因为浏览器的兼容问题，不同浏览器对有些标签的默认值是不同的，如果没对CSS初始化往往会出现浏览器之间的页面显示差异。
-	
-		- 当然，初始化样式会对SEO有一定的影响，但鱼和熊掌不可兼得，但力求影响最小的情况下初始化。
-
-		*最简单的初始化方法就是： * {padding: 0; margin: 0;} （不建议）
-	
-		淘宝的样式初始化： 
-		body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }
-		body, button, input, select, textarea { font:12px/1.5tahoma, arial, \5b8b\4f53; }
-		h1, h2, h3, h4, h5, h6{ font-size:100%; }
-		address, cite, dfn, em, var { font-style:normal; }
-		code, kbd, pre, samp { font-family:couriernew, courier, monospace; }
-		small{ font-size:12px; }
-		ul, ol { list-style:none; }
-		a { text-decoration:none; }
-		a:hover { text-decoration:underline; }
-		sup { vertical-align:text-top; }
-		sub{ vertical-align:text-bottom; }
-		legend { color:#000; }
-		fieldset, img { border:0; }
-		button, input, select, textarea { font-size:100%; }
-		table { border-collapse:collapse; border-spacing:0; } 
-
-
 
 - absolute的containing block计算方式跟正常流有什么不同？
 
