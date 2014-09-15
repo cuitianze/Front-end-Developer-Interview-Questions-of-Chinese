@@ -1103,7 +1103,7 @@ innerHTML可以重绘页面的一部分
 			}
 			
 			add.call(sub,3,1);  
-			
+
 ####[[⬆]](#toc) <a name='jquery'>jQuery 相关问题：</a>
 
 * 解释"chaining"。
@@ -1139,6 +1139,66 @@ innerHTML可以重绘页面的一部分
 ```javascript
 $(".foo div#bar:eq(0)")
 ```
+
+-  Jquery与jQuery UI 有啥区别？ 
+
+			
+		*jQuery是一个js库，主要提供的功能是选择器，属性修改和事件绑定等等。
+
+		*jQuery UI则是在jQuery的基础上，利用jQuery的扩展性，设计的插件。
+         提供了一些常用的界面元素，诸如对话框、拖动行为、改变大小行为等等
+
+
+-  JQuery的源码看过吗？能不能简单说一下它的实现原理？
+
+-  jquery 中如何将数组转化为json字符串，然后再转化回来？
+
+			
+jQuery中没有提供这个功能，所以你需要先编写两个jQuery的扩展：
+ 
+		$.fn.stringifyArray = function(array) {
+		    return JSON.stringify(array)
+		}
+		
+		$.fn.parseArray = function(array) {
+		    return JSON.parse(array)
+		} 
+
+		然后调用：
+		$("").stringifyArray(array)
+
+
+-  针对 jQuery 的优化方法？
+
+		*基于Class的选择性的性能相对于Id选择器开销很大，因为需遍历所有DOM元素。
+
+		*频繁操作的DOM，先缓存起来再操作。用Jquery的链式调用更好。   
+         比如：var str=$("a").attr("href");
+
+		*for (var i = size; i < arr.length; i++) {}
+         for 循环每一次循环都查找了数组 (arr) 的.length 属性，在开始循环的时候设置一个变量来存储这个数字，可以让循环跑得更快： 
+         for (var i = size, length = arr.length; i < length; i++) {}
+
+
+-  JavaScript中的作用域与变量声明提升？ 
+
+-  如何编写高性能的Javascript？
+
+-  那些操作会造成内存泄漏？
+
+
+			 
+	    内存泄漏指任何对象在您不再拥有或需要它之后仍然存在。
+        垃圾回收器定期扫描对象，并计算引用了每个对象的其他对象的数量。如果一个对象的引用数量为 0（没有其他对象引用过该对象），或对该对象的惟一引用是循环的，那么该对象的内存即可回收。
+
+        setTimeout 的第一个参数使用字符串而非函数的话，会引发内存泄漏。
+		闭包、控制台日志、循环（在两个对象彼此引用且彼此保留时，就会产生一个循环）
+
+-  JQuery一个对象可以同时绑定多个事件，这是如何实现的？
+
+- 如何判断当前脚本运行在浏览器还是node环境中？（阿里）
+			
+		通过判断Global对象是否为window，如果不为window，当前脚本没有运行在浏览器中
 
 ####[[⬆]](#toc) <a name='jscode'>代码相关的问题：</a>
 
