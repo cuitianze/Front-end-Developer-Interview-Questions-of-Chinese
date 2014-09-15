@@ -12,7 +12,8 @@
   1. [jQuery 相关问题](#jquery)
   1. [代码相关的问题](#jscode)
   1. [有趣的问题](#fun)
-  1. [其他参考资料](#references)
+  1. [其他问题](#other)
+  1. [推荐网站](#web)
 
 ####[[⬆]](#toc) <a name='contributors'>最初贡献者</a>
 
@@ -1249,7 +1250,7 @@ foo.push(2);
 
 * 你最爱的 IE 特性是什么？
 
-## <a name='other'>其他问题</a>
+####[[⬆]](#toc) <a name='other'>其他问题：</a>
 
 
 - 你遇到过比较难的技术问题是？你是如何解决的？
@@ -1405,7 +1406,7 @@ foo.push(2);
 			公司的薪资结构是什么样子的？
 
 
-## <a name='web'>优质网站推荐</a>
+####[[⬆]](#toc) <a name='web'>优质网站推荐：</a>
 
 1. 极客标签：		 http://www.gbtags.com/
 
