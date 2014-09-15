@@ -534,38 +534,32 @@ HTML5？
 * 你熟悉 SVG 样式的书写吗？
 
 * 如何优化网页的打印样式？
-	CSS控制网页打印样式： 
-	使用CSS控制打印样式，握刚刚使用时一塌糊涂，根本不知道CSS中的midia的作用是什么，问到别人说导入这个样式，还傻乎乎的不知所措。如果你也有这种现象，那么我告诉你吧，在W3school查到CSS的midia的作用。 
-
-	midia 定义和用法： 
-	media 属性规定被链接文档将显示在什么设备上。 
-	media 属性用于为不同的媒介类型规定不同的样式。 
-	原来用到media来指定css的媒体类型，它的语法格式有这样几种： 
-	@media screen | print | projection | braille | aural | tv | handheld | all 
-
-	参数说明： 
-	screen：指计算机屏幕。 
-	print：指用于打印机的不透明介质。 
-	projection：指用于显示的项目。 
-	braille：盲文系统，指有触觉效果的印刷品。 
-	aural：指语音电子合成器。 
-	tv：电视类型的媒体。 
-	handheld：指手持式显示设备。 
-	all：用于所有媒体。 
-	只要导入将不想打印的东西加入下面这CSS样式声明中，将在打印的页面不会出现： 
-
-	　　代码如下:
-
-	　　<link rel="stylesheet" media="print" type="text/css" /> 
-
-
-	例如： 
-
-	　　代码如下:
-
-	　　<style midia="print">//midia必须声明，不然无效了 
-	#my_hidden{display:none;} 
+	* CSS控制网页打印样式： 
+		media 定义和用法： 
+		media 属性规定被链接文档将显示在什么设备上。 
+		media 属性用于为不同的媒介类型规定不同的样式。 
+		用到media来指定css的媒体类型，它的语法格式有这样几种： 
+		@media screen | print | projection | braille | aural | tv | handheld | all 
+	* 参数说明： 
+		screen：指计算机屏幕。 
+		print：指用于打印机的不透明介质。 
+		projection：指用于显示的项目。 
+		braille：盲文系统，指有触觉效果的印刷品。 
+		aural：指语音电子合成器。 
+		tv：电视类型的媒体。 
+		handheld：指手持式显示设备。 
+		all：用于所有媒体。 
+	* 只要导入将不想打印的东西加入下面这CSS样式声明中，将在打印的页面不会出现： 
+	* 代码如下:
+```html
+　 <link rel="stylesheet" media="print" type="text/css" /> 
+```
+	* 例如：代码如下:
+```html
+	<style media="print"> <!-- media必须声明，不然无效了 -->
+		#my_hidden{display:none;} 	
 	</style>
+```
 
 * 在书写高效 CSS 时会有哪些问题需要考虑？
 
