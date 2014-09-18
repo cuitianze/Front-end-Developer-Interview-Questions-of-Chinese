@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>使用checked实现幻灯片</title>
+	<meta	charset="utf-8"/>
+	<style type="text/css">
+		img {
+			display: none;
+			width: 100px;
+			height: 100px;
+			opacity: 0;
+			-webkit-transition: all 5s ease-in-out;
+		}
+		input:checked + img {
+			display: block;
+			opacity: 1;
+		}
+		input {
+			position: absolute;
+			left: -9999px;
+		}
+		label {
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div id="cont">
+		<input id="img1" name="img" type="radio" checked="checked"/>
+		<img src="images/2.jpg"/>
+		<input id="img2" name="img" type="radio"/>
+		<img src="images/4.jpg"/>
+	</div>
+	<div id="nav">	
+		<label for="img1">第一张</label>
+		<label for="img2">第二张</label>
+	</div>
+	<div id="data" data-author="cuitianze" data-time="2014-9-18" data-comment-num="10086" data-category="javascript">
+		1234567890
+	</div>
+	<script type="text/javascript">
+		var post = document.getElementById("data");
+		var dataset = post.dataset;
+		post.innerHTML += dataset;
+		var commentNum = dataset.commentNum;
+		post.innerHTML += commentNum;
+		var time = dataset.time;
+		post.innerHTML += time;
+		var author = dataset.author;
+		post.innerHTML += author;
+	</script>
+</body>
+</html>
