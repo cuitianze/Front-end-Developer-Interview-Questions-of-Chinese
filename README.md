@@ -1010,6 +1010,51 @@ HTML5？
 ####[[⬆]](#toc) <a name='js'>JS相关问题：</a>
 
 * use strict
+```
+	[javascript] 
+	"use strict"; 
+
+	这样很巧妙地兼容了那些不支持strict mode老的浏览器，不会报错。
+	使用 strict mode 有以下几个好处：
+
+	防止意外定义的全局变量
+	[javascript]
+	"use strict"; 
+	x = 5; // 没有事先声明，会报错 
+
+	取消this值的自动转换
+	[javascript] view plaincopy
+	window.hi= "Hi"; 
+	 
+	function sayHi() { 
+	    alert(this.hi); // 报错 
+	} 
+
+	防止重复定义
+	[javascript] 
+	var someObject = { 
+	    prop: "test", 
+	    prop: "test2"  //报错 
+	}; 
+
+	此外，strict mode 还去掉了对with 语句的支持； eval 中声明的变量也不会在包含域中创建。
+	最后，建议大家开始在JS代码中使用strict mode，更早发现隐藏的错误。
+```
+```
+	(function() {
+		"use strict";
+		function doSomething() {
+			// 运行于严格模式
+		}
+		function doSomethindElse() {
+			// 同样运行于严格模式
+		}
+	}());
+```
+	* 强烈建议你从现在开始就启用JavaScript严格模式,它能帮你发现代码中未曾注意到的错误。
+	* 不要在全局环境中启用,但你能尽量多的使用IIFE(立即执行函数表达式)来把严格模式作用到多个函数范围内。
+	* 一开始,你会遇到之前未曾碰到过的错误提示,这是正常的。当启用严格模式后,请确保在支持的浏览器中做了测试,以发现新的潜在问题。
+	* 一定不要仅仅在代码中添加一行”use strict”就假定余下的代码能正常工作。最后,请在严格模式下开始编写更好的代码。
 
  [JavaScript严谨模式(Strict Mode)提升开发效率和质量](http://flandycheng.blog.51cto.com/855176/982719)
 
