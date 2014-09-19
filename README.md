@@ -1006,6 +1006,9 @@ HTML5？
 - display:inline-block 什么时候会显示间隙？(携程)
 
 		移除空格、使用margin负值、使用font-size:0、letter-spacing、word-spacing
+
+* css规范
+	[css规范](http://willhamlam.gitbooks.io/a_better_front-end_guideline/index.html)
  
 ####[[⬆]](#toc) <a name='js'>JS相关问题：</a>
 
@@ -1057,6 +1060,57 @@ HTML5？
 	* 一定不要仅仅在代码中添加一行”use strict”就假定余下的代码能正常工作。最后,请在严格模式下开始编写更好的代码。
 
  [JavaScript严谨模式(Strict Mode)提升开发效率和质量](http://flandycheng.blog.51cto.com/855176/982719)
+
+* javascript的__proto__（注意前后都是两条下划线）和prototype都可以访问对象的原型对象，那么他们之间有什么不同吗？
+
+* __proto__是只能用 对象. 来访问，而prototype则只能是 类. 来访问
+
+```
+/**
+    * 利用原型模式实现简单继承
+    */
+   function per(){
+       this.getName = function(str){
+           alert(str);
+       }
+   }
+   per.prototype.getAge = function(age){
+       alert(age);
+   }
+   var a = {};
+   a.__proto__ = per.prototype;
+   //a.getAge(2);
+  // a.getName("a");
+   /**
+    * 简单方式实现继承
+    */
+   var b = {};
+   b.__proto__ = new per();
+   b.__proto__.constructor = b;
+   b.getAge("1");
+   b.getName("a");
+ 
+   /**
+    * 串联继承
+    */
+   function A(){
+       this.getA = "a";
+   }
+   function B(){
+       this.getB = "b";
+   }
+   function K(){}
+   B.prototype = new A();
+   B.prototype.constructor = B;
+ 
+   K.prototype = new B();
+   K.prototype.constructor = K;
+ 
+   var test = new K();
+   alert(test.getA);
+   alert(test.getB);
+```
+
 
 * 解释下事件代理。
 	* JavaScript事件代理则是一种简单的技巧，通过它你可以把事件处理器添加到一个父级元素上，这样就避免了把事件处理器添加到多个子级元素上。
