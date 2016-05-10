@@ -353,7 +353,7 @@ img:target {
     * 常见的文档类型有 Strict、Transitional 以及 Frameset 三种。
 
 * 文档为什么要分类型？
-	* 如果文档不分类型，各浏览器就会形成多种写法，假如IE用<title>标签作为标题、火狐浏览器用\<caption>标签作为标题，而另一种浏览器可能采用\<mytitle>，这对于开发者和用户来说简直是灾难。W3C（万 维网联盟World Wide Web Consortium）制作了对所有方面都平衡的分歧解决方案，并且各浏览器没有异议，于是用\<!doctype>（注意：作为一个特殊的标 签，它是不需要闭合的）标签来引入W3C的dtd文件，以达到规范页面的效果。这为浏览器的文档标准的统一以及开发人员和用户带了了便利。而html5不是基于SGML实现的，因此html不需要引入DTD，所以html5可以简单的声明一下\<!doctype html>。
+	* 如果文档不分类型，各浏览器就会形成多种写法，假如IE用`<title>`标签作为标题、火狐浏览器用`<caption>`标签作为标题，而另一种浏览器可能采用`<mytitle>`，这对于开发者和用户来说简直是灾难。W3C（万 维网联盟World Wide Web Consortium）制作了对所有方面都平衡的分歧解决方案，并且各浏览器没有异议，于是用`<!doctype>`（注意：作为一个特殊的标 签，它是不需要闭合的）标签来引入W3C的dtd文件，以达到规范页面的效果。这为浏览器的文档标准的统一以及开发人员和用户带了了便利。而html5不是基于SGML实现的，因此html不需要引入DTD，所以html5可以简单的声明一下`<!doctype html>`。
 
 * 如果不声明doctype？
 	* 不写doctype，浏览器会进入quirks mode （混杂模式）。即，如果不声明doctype，浏览器不引入w3c的标准，那么早期的浏览器会按照自己的解析方式渲染页面。浏览器采用自身方式解析页面的行为称为"quirks mode（混杂模式也称怪异模式）"；采用w3c方式解析就是"strict mode（标准模式）"。 如果完全采用strictmode就不会出任何的差错，但这样会降低程序的容错率，加重开发人员的难度，因此在standards mode 里面分出来 Almost Standards Mode(接近标准模式）。
